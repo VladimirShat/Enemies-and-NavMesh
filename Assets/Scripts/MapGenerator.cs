@@ -16,7 +16,7 @@ public class MapGenerator : MonoBehaviour
 
     void Update()
     {
-        //create new map
+        //recreate new map
         if (Input.GetMouseButtonDown(1))
         {
             foreach (Transform child in transform)

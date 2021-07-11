@@ -10,8 +10,6 @@ public class Character_Movement : MonoBehaviour
     float jumpForce = 7.0f;
     float gravityForce = 20.0f;
 
-    public GameObject weapon;
-
     void Update()
     {
         CharacterController controller = GetComponent<CharacterController>();
@@ -31,10 +29,5 @@ public class Character_Movement : MonoBehaviour
 
         moveDirection.y -= gravityForce * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
-
-        if (Input.GetButtonDown("Fire"))
-            weapon.transform.Rotate(new Vector3(50,0,0));
-        if (Input.GetButtonUp("Fire"))
-            weapon.transform.Rotate(new Vector3(-50, 0, 0));
     }
 }
