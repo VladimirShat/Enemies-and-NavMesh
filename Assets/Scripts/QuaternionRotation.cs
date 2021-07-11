@@ -5,14 +5,13 @@ using UnityEngine;
 public class QuaternionRotation : MonoBehaviour
 {
     public float angle;
-    float angle1;
-    public Vector3 v;
-    Quaternion q;
-    public GameObject go;
+    public Vector3 axisRotation;
+
+    private Quaternion q;
 
     void Update()
     {
-        q = Quaternion.AngleAxis(angle, v);
-        go.transform.rotation = go.transform.rotation * q;
+        q = Quaternion.AngleAxis(angle, axisRotation);
+        transform.rotation = transform.rotation * q;
     }
 }

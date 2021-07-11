@@ -35,10 +35,11 @@ public class WeaponChanger : MonoBehaviour
         }
     }
 
-    private void ChangeWeapon(GameObject needWeapon)
+    private void ChangeWeapon(GameObject wantedWeapon)
     {
         currentWeapon.SetActive(false);
-        needWeapon.SetActive(true);
-        currentWeapon = needWeapon;
+        wantedWeapon.SetActive(true);
+
+        currentWeapon = wantedWeapon;
     }
 }

@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunWeapon : MonoBehaviour
+public class Gun : MonoBehaviour
 {
-    public string enemyTag = "Enemy";
     public float damage = 10f;
     public float range = 100f;
     public float impactForce = 30f;
 
-    public Camera fpsCam;
+    public Camera playerCam;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
 
@@ -26,14 +25,21 @@ public class GunWeapon : MonoBehaviour
         muzzleFlash.Play();
 
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
         {
-            if (hit.transform.tag == enemyTag)
+            Enemy enemy = hit.transform.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                hit.transform.GetComponent<Enemy>().TakeDamage(damage);
+                enemy.TakeDamage(damage);
             }
 
-            if(hit.rigidbody != null)
+            Destructible desObj = hit.transform.GetComponent<Destructible>();
+            if (desObj != null)
+            {
+                desObj.TakeDamage(damage);
+            }
+
+            if (hit.rigidbody != null)
             {
                 hit.rigidbody.AddForce(-hit.normal * impactForce);
             }

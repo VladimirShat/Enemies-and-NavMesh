@@ -5,9 +5,10 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     public GameObject[] tiles;
-    public int columns;
-    public int rows;
-    private int currentTile = 0;
+    public int columnCount;
+    public int rowCount;
+
+    private GameObject currentTile;
 
     void Start()
     {
@@ -16,7 +17,7 @@ public class MapGenerator : MonoBehaviour
 
     void Update()
     {
-        //recreate new map
+        //recreate map
         if (Input.GetMouseButtonDown(1))
         {
             foreach (Transform child in transform)
@@ -27,13 +28,15 @@ public class MapGenerator : MonoBehaviour
 
     void LoadMap()
     {
-        for (int x = 0; x < rows; x++)
+        for (int x = 0; x < rowCount; x++)
         {
-            for (int z = 0; z < columns; z++)
+            for (int z = 0; z < columnCount; z++)
             {
-                currentTile = Random.Range(0, tiles.Length);
-                GameObject tileObj;
-                tileObj = Instantiate(tiles[currentTile], new Vector3(x + transform.localPosition.x + tiles[currentTile].transform.localScale.x / 2, transform.localPosition.y, z + transform.localPosition.z + tiles[currentTile].transform.localScale.z / 2), Quaternion.identity);
+                currentTile = tiles[Random.Range(0, tiles.Length)];
+                Vector3 halfTileScale = currentTile.transform.localScale / 2;
+                Vector3 currentTilePosition = new Vector3(transform.localPosition.x + x + halfTileScale.x, transform.localPosition.y, transform.localPosition.z + z + halfTileScale.z);
+
+                GameObject tileObj = Instantiate(currentTile, currentTilePosition, Quaternion.identity);
                 tileObj.transform.parent = transform;
             }
         }

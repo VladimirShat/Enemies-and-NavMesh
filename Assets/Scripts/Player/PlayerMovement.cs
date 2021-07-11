@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character_Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    Vector3 moveDirection;
-    float walkSpeed = 6.0f;
-    float runSpeed = 18.0f;
-    float jumpForce = 7.0f;
-    float gravityForce = 20.0f;
+    public float walkSpeed = 6f;
+    public float runSpeed = 12f;
+    public float jumpForce = 7f;
+    public float gravityForce = 18f;
+
+    private Vector3 moveDirection;
 
     void Update()
     {
@@ -18,12 +19,17 @@ public class Character_Movement : MonoBehaviour
         {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
+
             if (Input.GetButton("Run"))
+            {
                 moveDirection *= runSpeed;
+            }
             else moveDirection *= walkSpeed;
 
             if (Input.GetButton("Jump"))
+            {
                 moveDirection.y += jumpForce;
+            }
                 
         }
 

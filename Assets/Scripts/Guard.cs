@@ -17,6 +17,9 @@ public class Guard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        navmesh.destination = player.transform.position;
+        if (navmesh.enabled)
+        {
+            navmesh.destination = player.transform.position;
+        }
     }
 }

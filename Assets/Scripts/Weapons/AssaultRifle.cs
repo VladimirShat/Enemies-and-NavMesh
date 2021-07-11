@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoGunWeapon : MonoBehaviour
+public class AssaultRifle : MonoBehaviour
 {
-    public string enemyTag = "Enemy";
     public float damage = 10f;
     public float range = 100f;
     public float fireRate = 15f;
     public float impactForce = 30f;
 
-    public Camera fpsCam;
+    public Camera playerCam;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
 
@@ -30,7 +29,7 @@ public class AutoGunWeapon : MonoBehaviour
         muzzleFlash.Play();
 
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
         {
             Enemy enemy = hit.transform.GetComponent<Enemy>();
             if(enemy != null)
